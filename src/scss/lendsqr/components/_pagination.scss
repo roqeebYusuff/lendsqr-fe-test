@@ -1,0 +1,44 @@
+.table-footer {
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .showing {
+    font-family: "Work Sans";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #545f7d;
+    select {
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 7px 12px;
+      background: rgba(33, 63, 125, 0.1);
+      border-radius: 4px;
+      border: none;
+    }
+  }
+  .paginations {
+    .pages {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      .page-item {
+        &.prev,
+        &.next {
+          background: rgba(33, 63, 125, 0.1);
+          border-radius: 4px;
+        }
+        .page-link {
+          width: 24px;
+          height: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
