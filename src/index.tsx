@@ -4,14 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/scss/bootstrap.scss';
 import './scss/lendsqr.scss'
 import App from './App';
+import Provider from './utils/Provider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
