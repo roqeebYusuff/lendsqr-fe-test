@@ -1,4 +1,36 @@
 .main {
   background-color: #fbfbfb;
   min-height: 100vh;
+  font-family: "Work Sans", sans-serif;
+  .main-wrapper {
+    display: flex;
+    aside {
+      width: 220px;
+      background: #ffffff;
+      box-shadow: 3px 0px 20px rgb(0 0 0 / 4%);
+      min-height: 100vh;
+      margin-top: 60px;
+      position: fixed;
+      z-index: 9999;
+      transition: 0.2s;
+      &.showSidebar {
+        transform: translateX(0);
+      }
+      @media screen and (max-width: 768px) {
+        transform: translateX(-300px);
+        margin-top: 50px;
+      }
+    }
+    main {
+      width: 100%;
+      padding: 60px;
+      padding-left: 280px;
+      margin-top: 65px;
+      transition: 0.2s;
+      @media screen and (max-width: 768px) {
+        padding: 20px;
+        padding-top: 40px;
+      }
+    }
+  }
 }
