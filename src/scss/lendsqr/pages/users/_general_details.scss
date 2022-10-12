@@ -1,0 +1,201 @@
+.user-details {
+  .navigate {
+    font-family: "Work Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #545f7d;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    margin-bottom: 32px;
+  }
+  .page-heading-wrapper {
+    margin-bottom: 40px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start !important;
+    }
+    h2 {
+      font-family: "Work Sans";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      color: #213f7d;
+    }
+    .actions {
+      button {
+        background: transparent;
+        border: 1px solid;
+        border-radius: 8px;
+        &:nth-child(1) {
+          $color: #e4033b;
+          border-color: $color;
+          color: $color;
+          margin-right: 20px;
+          &:hover {
+            background-color: $color;
+            color: #fff;
+          }
+        }
+        &:nth-child(2) {
+          $color: #39cdcc;
+          border-color: $color;
+          color: $color;
+          &:hover {
+            background-color: $color;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .details {
+    .basic-info {
+      box-shadow: $box-shadow;
+      padding: 30px;
+      padding-bottom: 0;
+      margin-bottom: 30px;
+      max-width: 100%;
+      overflow: auto;
+      .info-wrapper {
+        display: flex;
+        align-items: center;
+        .image {
+          $dimension: 100px;
+          background: #d9dee7;
+          border-radius: 50%;
+          height: $dimension;
+          width: $dimension;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 20px;
+          img {
+            object-fit: contain;
+            border-radius: 50%;
+          }
+        }
+        .user {
+          border-right: 1px solid #cfd5e2;
+          padding-right: 30px;
+          h3 {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 26px;
+            color: #213f7d;
+          }
+          p {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            color: #545f7d;
+          }
+        }
+        .tiers {
+          padding: 0 30px;
+          border-right: 1px solid #cfd5e2;
+          h6 {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: #545f7d;
+          }
+        }
+        .account {
+          padding: 0 30px;
+          h3 {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 26px;
+            color: #213f7d;
+            p {
+              font-family: "Work Sans";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 14px;
+              color: #213f7d;
+            }
+          }
+        }
+      }
+      .tabs {
+        margin-top: 50px;
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          li {
+            button {
+              border: none;
+              background-color: transparent;
+              color: rgba(0, 0, 0, 0.8);
+              &.active {
+                border-bottom: 2px solid #39cdcc;
+                color: #39cdcc;
+              }
+            }
+          }
+        }
+      }
+    }
+    .details-wrapper {
+      box-shadow: $box-shadow;
+      padding: 30px;
+      .single-detail {
+        padding-top: 28px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid #cfd5e2;
+        &:nth-child(1) {
+          padding-top: 8px;
+        }
+        &:last-child {
+          border: none;
+        }
+        .section-title {
+          margin-bottom: 30px;
+          h4 {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: #213f7d;
+          }
+        }
+        .deatils_row {
+          h4 {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            text-transform: uppercase;
+            color: #545f7d;
+          }
+          p {
+            font-family: "Work Sans";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: #545f7d;
+          }
+        }
+      }
+    }
+  }
+}
