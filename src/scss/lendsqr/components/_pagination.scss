@@ -31,6 +31,14 @@
         &.next {
           background: rgba(33, 63, 125, 0.1);
           border-radius: 4px;
+          &.disabled {
+            opacity: 0.5;
+          }
+        }
+        &.prev {
+          img {
+            transform: rotate(180deg);
+          }
         }
         .page-link {
           width: 24px;

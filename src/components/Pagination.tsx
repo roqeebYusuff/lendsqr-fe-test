@@ -41,71 +41,133 @@ const Pagination: React.FC<Props> = ({ totalPage, pageSize, setPageSize, current
             )
         }
         else {
-            let lastTwo = [totalPage - 1, totalPage]
             let all = []
-            for (let i = 1; i <= 3; i++) {
+            if (currentPage < 3) {
+                for (let i = 1; i <= 3; i++) {
+                    all.push(
+                        <li
+                            key={i}
+                            className={
+                                currentPage === i
+                                    ? "page-item disabled"
+                                    : "page-item"
+                            }
+                        >
+                            <a
+                                className="page-link"
+                                href={`#${i}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage(i);
+                                }}
+                            >
+                                {i}
+                            </a>
+                        </li>
+                    )
+                }
+
+                /* Skip */
                 all.push(
                     <li
-                        key={i}
-                        className={
-                            currentPage === i + 1
-                                ? "custom-disabled active page-item"
-                                : "page-item"
-                        }
+                        className='page-item skip'
                     >
                         <a
                             className="page-link"
-                            href={`#${i}`}
+                            href='#!'
                             onClick={(e) => {
                                 e.preventDefault();
-                                setCurrentPage(i);
                             }}
                         >
-                            {i}
+                            ...
                         </a>
                     </li>
+                )
+
+                /* Last two pages */
+                all.push(
+                    <>
+                        <li
+                            className={
+                                currentPage === totalPage - 1
+                                    ? "page-item disabled"
+                                    : "page-item"
+                            }
+                        >
+                            <a
+                                className="page-link"
+                                href={`#${totalPage - 1}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage(totalPage - 1);
+                                }}
+                            >
+                                {totalPage - 1}
+                            </a>
+                        </li>
+                        <li
+                            className={
+                                currentPage === totalPage
+                                    ? "page-item disabled"
+                                    : "page-item"
+                            }
+                        >
+                            <a
+                                className="page-link"
+                                href={`#${totalPage}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage(totalPage);
+                                }}
+                            >
+                                {totalPage}
+                            </a>
+                        </li>
+                    </>
                 )
             }
 
-            all.push(
-                <li
-                    className='page-item skip'
-                >
-                    <a
-                        className="page-link"
-                        href='#!'
-                        onClick={(e) => {
-                            e.preventDefault();
-                        }}
-                    >
-                        ...
-                    </a>
-                </li>
-            )
-
-            lastTwo.map((i) => {
+            if (currentPage >= 3) {
+                /* Skip */
                 all.push(
                     <li
-                        key={i}
-                        className={
-                            currentPage === i
-                                ? "custom-disabled active page-item"
-                                : "page-item"
-                        }
+                        className='page-item skip'
                     >
                         <a
                             className="page-link"
-                            href={`#${i}`}
+                            href='#!'
                             onClick={(e) => {
                                 e.preventDefault();
-                                setCurrentPage(i);
                             }}
                         >
-                            {i}
+                            ...
                         </a>
                     </li>
                 )
-            })
+                for (let i = 4; i <= totalPage; i++) {
+                    all.push(
+                        <li
+                            key={i}
+                            className={
+                                currentPage === i
+                                    ? "page-item disabled"
+                                    : "page-item"
+                            }
+                        >
+                            <a
+                                className="page-link"
+                                href={`#${i}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage(i);
+                                }}
+                            >
+                                {i}
+                            </a>
+                        </li>
+                    )
+                }
+            }
             return all
         }
     }, [setCurrentPage, currentPage, totalPage])
@@ -129,7 +191,7 @@ const Pagination: React.FC<Props> = ({ totalPage, pageSize, setPageSize, current
             <nav className='paginations'>
                 <ul className='pages'>
                     <li
-                        className={`page-item prev ${pageSize === 1 ? "disabled" : ""}`}
+                        className={`page-item prev ${currentPage <= 1 ? "disabled" : ""}`}
                     >
                         <a
                             href="#!"
@@ -139,14 +201,14 @@ const Pagination: React.FC<Props> = ({ totalPage, pageSize, setPageSize, current
                                 setCurrentPage(currentPage - 1)
                             }}
                         >
-                            <img src={previous} alt="Previous" />
+                            <img src={next} alt="Previous" />
                         </a>
                     </li>
 
                     {
                         MemoisedGetPager
                     }
-                    <li className={`page-item next ${pageSize >= totalPage ? "disabled" : ""}`} >
+                    <li className={`page-item next ${currentPage >= totalPage ? "disabled" : ""}`} >
                         <a
                             className="page-link"
                             href="#!"
