@@ -61,7 +61,7 @@ const LendsqrProvider: React.FC<Props> = ({ children }) => {
     const fetchUsers = useCallback(() => {
         setInitialized(true)
         return new Promise((resolve, reject) => {
-            fetch('http://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users', {
+            fetch(`${process.env.REACT_APP_BASE_API_URL}`, {
                 "method": "GET"
             })
                 .then(response => {
@@ -79,7 +79,7 @@ const LendsqrProvider: React.FC<Props> = ({ children }) => {
 
     const userDetails = useCallback((id: number) => {
         return new Promise((resolve, reject) => {
-            fetch(`http://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`, {
+            fetch(`${process.env.REACT_APP_BASE_API_URL}/${id}`, {
                 "method": "GET"
             })
                 .then(response => {
