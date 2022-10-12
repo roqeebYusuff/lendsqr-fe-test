@@ -66,10 +66,7 @@
         align-items: center;
         .image {
           $dimension: 100px;
-          background: #d9dee7;
           border-radius: 50%;
-          height: $dimension;
-          width: $dimension;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -77,6 +74,10 @@
           img {
             object-fit: contain;
             border-radius: 50%;
+            height: 100%;
+            @media screen and (max-width: 768px) {
+              height: 70px;
+            }
           }
         }
         .user {
@@ -144,6 +145,7 @@
               border: none;
               background-color: transparent;
               color: rgba(0, 0, 0, 0.8);
+              white-space: nowrap;
               &.active {
                 border-bottom: 2px solid #39cdcc;
                 color: #39cdcc;
