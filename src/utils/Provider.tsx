@@ -37,7 +37,6 @@ const LendsqrProvider: React.FC<Props> = ({ children }) => {
 
 
     const [authUser, setAuthUser] = useState<[] | any>(null)
-    const [initialized, setInitialized] = useState<boolean>(false)
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
     const [showSidebar, setShowSidebar] = useState<boolean>(false)
 
@@ -50,16 +49,15 @@ const LendsqrProvider: React.FC<Props> = ({ children }) => {
                 resolve({ success: true })
             });
         },
-        [isLoggedIn, userContext],
+        [],
     )
 
     const logout = useCallback(() => {
         localStorage.removeItem(LOCAL_STORAGE_NAME)
         setIsLoggedIn(false)
-    }, [userContext, isLoggedIn])
+    }, [])
 
     const fetchUsers = useCallback(() => {
-        setInitialized(true)
         return new Promise((resolve, reject) => {
             fetch(`${process.env.REACT_APP_BASE_API_URL}`, {
                 "method": "GET"
@@ -97,7 +95,6 @@ const LendsqrProvider: React.FC<Props> = ({ children }) => {
 
 
     const toggleSidebar = useCallback(() => {
-        console.log('running herer')
         setShowSidebar(!showSidebar)
     }, [showSidebar])
 

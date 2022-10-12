@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import previous from '../assets/icons/previous.svg'
 import next from '../assets/icons/next.svg'
 
@@ -8,12 +8,13 @@ interface Props {
     setPageSize: React.Dispatch<React.SetStateAction<number>>;
     currentPage: number;
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+    users: any[]
 }
 
-const Pagination: React.FC<Props> = ({ totalPage, pageSize, setPageSize, currentPage, setCurrentPage }) => {
+const Pagination: React.FC<Props> = ({ totalPage, pageSize, setPageSize, currentPage, setCurrentPage, users }) => {
 
     const GetPager = useCallback(() => {
-        console.log('got to getpager')
+        // console.log('executing getpager')
         if (totalPage <= 5) {
             return (
                 [...Array(totalPage)].map((page, index) => (
@@ -116,14 +117,14 @@ const Pagination: React.FC<Props> = ({ totalPage, pageSize, setPageSize, current
     return (
         <div className='table-footer d-flex justify-content-between'>
             <div className="showing">
-                SHowing
+                Showing
                 <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))} name="showing" id="">
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
-                out of 100
+                out of {users.length}
             </div>
             <nav className='paginations'>
                 <ul className='pages'>

@@ -60,6 +60,7 @@
       margin-bottom: 30px;
       max-width: 100%;
       overflow: auto;
+      background-color: #fff;
       .info-wrapper {
         display: flex;
         align-items: center;
@@ -154,6 +155,7 @@
     }
     .details-wrapper {
       box-shadow: $box-shadow;
+      background-color: #fff;
       padding: 30px;
       .single-detail {
         padding-top: 28px;

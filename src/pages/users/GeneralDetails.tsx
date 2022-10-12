@@ -14,14 +14,14 @@ const GeneralDetails: React.FC = () => {
     useEffect(() => {
         const userId = localStorage.getItem('userid');
         /* If no id is found, navigate to users page */
-        if(!userId){
+        if (!userId) {
             navigate('/users')
         }
         async function fetchData() {
             setLoading(true)
             await userDetails(userId)
                 .then((data: any) => {
-                    console.log(data)
+                    // console.log(data)
                     setUserData(data)
                     setLoading(false)
                 })
@@ -31,6 +31,7 @@ const GeneralDetails: React.FC = () => {
         }
         fetchData();
     }, [])
+
     return (
         <section className='user-details'>
             <button onClick={() => navigate(-1)} className="navigate"><img src={ArrowBack} alt="" /> Back to Users</button>

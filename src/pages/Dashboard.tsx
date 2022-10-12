@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, Table, UncontrolledDropdown } from 'reactstrap'
 import DashboardCards from '../data/DashboardCards'
 import filter from '../assets/icons/filter-results-button.svg'
@@ -10,6 +10,22 @@ import Pagination from '../components/Pagination'
 import { useAuth } from '../utils/Provider'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
+import Filter from '../components/Filter'
+
+function getRandomStatus() {
+  const status: string[] = [
+    'Inactive',
+    'Pending',
+    'Blacklisted',
+    'Active',
+  ];
+
+  const randomStatus = status[Math.floor(Math.random() * status.length)]
+
+  return (
+    <span className={`badge rounded-pill ${randomStatus.toLowerCase()}`}>{randomStatus}</span>
+  )
+}
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate()
@@ -23,7 +39,7 @@ const Dashboard: React.FC = () => {
 
   useMemo(
     () => {
-      console.log('Executing useCallback')
+      // console.log('Executing useMemoo')
       const start: number = (currentPage * pageSize) - pageSize
       const end: number = start + pageSize
       setTotalPage(Math.ceil(users.length / pageSize))
@@ -33,7 +49,7 @@ const Dashboard: React.FC = () => {
   )
 
   useEffect(() => {
-    console.log('Executing useEffect')
+    // console.log('Executing useEffect')
     async function fetchData() {
       setLoading(true)
       await fetchUsers()
@@ -49,7 +65,7 @@ const Dashboard: React.FC = () => {
         })
         .catch((error: any) => {
           setLoading(false)
-          console.log(error)
+          // console.log(error)
         })
     }
     fetchData();
@@ -67,7 +83,7 @@ const Dashboard: React.FC = () => {
                   <img src={item.icon} alt="" />
                 </div>
                 <h5 className="card-type">{item.type}</h5>
-                <h3 className="card-type">{item.total}</h3>
+                <h3 className="card-type">{users.length}</h3>
               </div>
             </Col>
           ))
@@ -75,16 +91,65 @@ const Dashboard: React.FC = () => {
       </Row>
 
       <section className='users-table'>
-        <Table responsive>
-          <div className="table-wrapper">
+        <div className="table-wrapper">
+          <Table>
             <thead>
               <tr>
-                <th scope="row">Organization <img src={filter} alt="Filter" /></th>
-                <th>Username <img src={filter} alt="Filter" /></th>
-                <th>Email <img src={filter} alt="Filter" /></th>
-                <th>Phone Number <img src={filter} alt="Filter" /></th>
-                <th>Date Joined <img src={filter} alt="Filter" /></th>
-                <th>Status <img src={filter} alt="Filter" /></th>
+                <th scope="row">
+                  <UncontrolledDropdown>
+                    <DropdownToggle className='d-flex justify-content-between' caret={false} tag='div'>
+                      <span>Organization</span>
+                      <img src={filter} alt="Filter" />
+                    </DropdownToggle>
+                    <Filter />
+                  </UncontrolledDropdown>
+                </th>
+                <th>
+                  <UncontrolledDropdown>
+                    <DropdownToggle className='d-flex justify-content-between' caret={false} tag='div'>
+                      <span>Username</span>
+                      <img src={filter} alt="Filter" />
+                    </DropdownToggle>
+                    <Filter />
+                  </UncontrolledDropdown>
+                </th>
+                <th>
+                  <UncontrolledDropdown>
+                    <DropdownToggle className='d-flex justify-content-between' caret={false} tag='div'>
+                      <span>Email</span>
+                      <img src={filter} alt="Filter" />
+                    </DropdownToggle>
+                    <Filter />
+                  </UncontrolledDropdown>
+                </th>
+                <th>
+                  <UncontrolledDropdown>
+                    <DropdownToggle className='d-flex justify-content-between' caret={false} tag='div'>
+                      <span>Phone Number</span>
+                      <img src={filter} alt="Filter" />
+                    </DropdownToggle>
+                    <Filter />
+                  </UncontrolledDropdown>
+                </th>
+                <th>
+                  <UncontrolledDropdown>
+                    <DropdownToggle className='d-flex justify-content-between' caret={false} tag='div'>
+                      <span>Date Joined </span>
+                      <img src={filter} alt="Filter" />
+                    </DropdownToggle>
+                    <Filter />
+                  </UncontrolledDropdown>
+                </th>
+                <th>
+                  <UncontrolledDropdown>
+                    <DropdownToggle className='d-flex justify-content-between' caret={false} tag='div'>
+                      <span>Status</span>
+                      <img src={filter} alt="Filter" />
+                    </DropdownToggle>
+                    <Filter />
+                  </UncontrolledDropdown>
+                </th>
+                <th></th>
               </tr>
             </thead>
 
@@ -100,8 +165,8 @@ const Dashboard: React.FC = () => {
                         <td>{item.profile.phoneNumber}</td>
                         {/* <td>May 15, 2020 10:00 AM</td> */}
                         <td>{moment(item.createdAt).format('MMM DD, YYYY h:mm A')}</td>
-                        <td>
-                          <span className="badge rounded-pill bg-primary">Inactive</span>
+                        <td className='status'>
+                          {getRandomStatus()}
                         </td>
                         <td>
                           <UncontrolledDropdown>
@@ -125,9 +190,9 @@ const Dashboard: React.FC = () => {
                 </>
               }
             </tbody>
-          </div>
-        </Table>
-        <Pagination totalPage={totalPage} pageSize={pageSize} setPageSize={setPageSize} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          </Table>
+        </div>
+        <Pagination totalPage={totalPage} pageSize={pageSize} setPageSize={setPageSize} currentPage={currentPage} setCurrentPage={setCurrentPage} users={users} />
       </section>
     </section >
   )
