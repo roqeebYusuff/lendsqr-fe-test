@@ -1,11 +1,79 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import illustration from '../assets/illustration.svg'
 import logo from '../assets/logo.svg'
 import { FormGroup, Input, Row, Col, Button, Container } from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../utils/Provider'
 
-function Auth() {
+interface ErrorTypes {
+  email: string,
+  password: string
+}
+
+const Auth: React.FC = () => {
+  const navigate = useNavigate()
+  const user = useAuth()
   const [togglePassword, setTogglePassword] = useState<boolean>(false)
+  const [inputs, setInputs] = useState<ErrorTypes>({
+    email: '',
+    password: ''
+  })
+  const [errors, setErrors] = useState<ErrorTypes>({
+    email: '',
+    password: ''
+  })
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    validateInput(e);
+  }
+
+  const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { name, value } = e.target;
+    setErrors(prev => {
+      const stateObj = { ...prev, [name]: "" };
+
+      switch (name) {
+        case "email":
+          if (!value) {
+            stateObj[name] = "Please enter email";
+          }
+          else if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))) {
+            stateObj[name] = "Email is not valid";
+          }
+          break;
+
+        case "password":
+          if (!value) {
+            stateObj[name] = "Please enter Password.";
+          }
+          break;
+
+        default:
+          break;
+      }
+
+      return stateObj;
+    });
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!inputs.email || !inputs.password) {
+      return
+    }
+
+    user.login(inputs.email, inputs.password)
+      .then((data: any) => {
+        navigate('/users')
+      })
+  }
+
   return (
     <main >
       <section className='auth'>
@@ -30,7 +98,7 @@ function Auth() {
                 <div className="form">
                   <h3>Welcome!</h3>
                   <p>Enter details to login</p>
-                  <form>
+                  <form onSubmit={(e) => handleSubmit(e)}>
                     <Row>
                       <Col md='12'>
                         <FormGroup>
@@ -38,8 +106,12 @@ function Auth() {
                             id="email"
                             name="email"
                             placeholder="Email"
-                            type="email"
+                            type="text"
+                            value={inputs.email}
+                            onChange={(e) => onInputChange(e)}
+                            onBlur={(e) => validateInput(e)}
                           />
+                          {errors.email && <span className='text-danger'>{errors.email}</span>}
                         </FormGroup>
                       </Col>
                       <Col md='12'>
@@ -49,15 +121,19 @@ function Auth() {
                             name="password"
                             placeholder="Password"
                             type={togglePassword ? 'text' : 'password'}
+                            value={inputs.password}
+                            onChange={(e) => onInputChange(e)}
+                            onBlur={(e) => validateInput(e)}
                           />
-                          <span onClick={() => setTogglePassword(!togglePassword)}> {togglePassword ? 'Hide' : 'Show'} </span>
+                          {errors.password && <span className='text-danger'>{errors.password}</span>}
+                          <span className='showHide' onClick={() => setTogglePassword(!togglePassword)}> {togglePassword ? 'Hide' : 'Show'} </span>
                         </FormGroup>
                       </Col>
                       <Col md='12'>
                         <Link to='/' className='forgot-password'>Forgot Password?</Link>
                       </Col>
                       <Col md='12'>
-                        <Button className='w-100'>Log in</Button>
+                        <Button type='submit' className='w-100'>Log in</Button>
                       </Col>
                     </Row>
                   </form>
