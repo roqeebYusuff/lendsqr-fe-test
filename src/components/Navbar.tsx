@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
                     <img className='img-fluid' src={logo} alt="Lendsqr Logo" />
                 </div>
                 <div className="mainn w-100">
-                    <div className='d-flex align-items-center justify-content-between'>
+                    <div className='wrapper'>
                         <div className="search">
                             <InputGroup>
                                 <Input type='text' name='search' id='search' placeholder='Search for anything' />

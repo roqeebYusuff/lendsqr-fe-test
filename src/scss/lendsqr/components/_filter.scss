@@ -1,0 +1,19 @@
+.filter-menu {
+  padding: 15px 20px;
+  .form-label {
+    font-family: "Work Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+    color: #545f7d;
+  }
+  .form-select,
+  .form-control {
+    border: 1px solid rgb(33, 63, 125, 0.2);
+    border-radius: 8px;
+    box-shadow: none;
+    &:focus {
+    }
+  }
+}
