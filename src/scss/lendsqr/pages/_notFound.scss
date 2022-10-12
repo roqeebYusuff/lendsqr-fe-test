@@ -1,0 +1,32 @@
+.not-found {
+  text-align: center;
+  font-family: "Work Sans";
+  h2 {
+    font-size: 8rem;
+    margin: 0;
+    font-weight: 500;
+    color: #545f7d;
+  }
+  h5 {
+    font-size: 2rem;
+    margin: 0;
+    margin-top: 0.5rem;
+    color: #545f7d;
+  }
+  p {
+    font-size: 1rem;
+    margin: 0;
+    margin-top: 0.5rem;
+    color: #545f7d;
+  }
+  button {
+    background-color: $color2;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 35px;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    box-shadow: none;
+    border: none;
+  }
+}
