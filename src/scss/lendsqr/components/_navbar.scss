@@ -2,15 +2,21 @@
   background: #ffffff;
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
   .logo {
     width: 300px;
-    img{
-      height: 30px;
+    img {
+      height: 25px;
     }
   }
   .mainn {
     .search {
       width: 400px;
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
       .input-group {
         position: relative;
         input {
@@ -33,13 +39,41 @@
         }
       }
     }
+    .hamburger {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: inline;
+      }
+      img{
+        height: 25px;
+      }
+    }
     .others {
       ul {
         list-style: none;
         margin: 0;
         li {
           display: inline-block;
-          margin-right: 20px;
+          margin-right: 10px;
+          &:first-child {
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
+          }
+          &.user {
+            .dropdown {
+              .dropdown-toggle {
+                img {
+                  height: 30px;
+                }
+                span {
+                  @media screen and (max-width: 768px) {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

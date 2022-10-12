@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
-import { Dropdown, Input, InputGroup, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import React, { useState, useContext } from 'react'
+import { Dropdown, Input, InputGroup, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import logo from '../assets/logo.svg'
 import searchIcon from '../assets/search.svg'
 import notification from '../assets/bell.svg'
+import menu from '../assets/icons/menu.svg'
+import close from '../assets/icons/close.svg'
 import avatar from '../assets/avatar.png'
+import { useAuth } from '../utils/Provider'
+import { LendsqrUserContext } from '../utils/Provider';
 
-const Navbar = () => {
-
+const Navbar: React.FC = () => {
+    const { logout, toggleSidebar } = useAuth()
+    const { showSidebar } = useContext(LendsqrUserContext).user
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -19,7 +24,7 @@ const Navbar = () => {
                 </div>
                 <div className="mainn w-100">
                     <div className='d-flex align-items-center justify-content-between'>
-                        <div className=" search">
+                        <div className="search">
                             <InputGroup>
                                 <Input type='text' name='search' id='search' placeholder='Search for anything' />
                                 <div className="icon">
@@ -27,6 +32,7 @@ const Navbar = () => {
                                 </div>
                             </InputGroup>
                         </div>
+
                         <div className="others">
                             <ul>
                                 <li>
@@ -44,16 +50,21 @@ const Navbar = () => {
                                         <DropdownMenu >
                                             <DropdownItem>Profile</DropdownItem>
                                             <DropdownItem>Settings</DropdownItem>
-                                            <DropdownItem>Logout</DropdownItem>
+                                            <DropdownItem onClick={(e) => { e.preventDefault(); logout() }}>Logout</DropdownItem>
                                         </DropdownMenu>
                                     </Dropdown>
                                 </li>
                             </ul>
                         </div>
+                        <div className='hamburger' onClick={() => { toggleSidebar() }}>{showSidebar ? (
+                            <img className='img-fluid' src={close} alt="Close" />
+                        ) : (
+                            <img className='img-fluid' src={menu} alt="Menu" />
+                        )}</div>
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 }
 
